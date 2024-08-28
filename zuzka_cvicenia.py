@@ -339,6 +339,58 @@ tkinter.mainloop()
 number = 23
 
 """
+
+import tkinter
+
+canvas = tkinter.Canvas(height = 500, width = 500, bg = "white")
+canvas.pack()
+
+n = 5
+x = 250
+y = 90
+
+def petri_dish():
+    x = 250
+    y = 400
+    canvas.create_oval(x-120,y-30,x+120,y+30, outline= "black",width= 2)
+    y -= 40
+    canvas.create_oval(x-120,y-30,x+120,y+30, outline= "black",width= 2)
+    canvas.create_line(x-120,y,x-120,y+40,width=2,fill="black")
+    canvas.create_line(x+120,y,x+120,y+40,fill="black", width= 2)
+
+petri_dish()
+
+counter = 0
+
+for i in range(1,n+1):
+    while y < 400:
+        if counter != n:
+            canvas.delete("drop")
+            canvas.create_oval(x-10,y-10,x+10,y+10,outline="blue",fill="blue",tag="drop")
+            canvas.update()
+            y += 5
+            if y == 400:
+                counter += 1
+                canvas.delete("drop")
+                x_increment= (240/n)/2
+                y_increment= (60/n)/2
+                canvas.create_oval(x - x_increment * counter, y - y_increment * counter, x + x_increment * counter, y + y_increment * counter, outline= "blue",fill="blue")
+                petri_dish()
+                canvas.delete("txt")
+                canvas.create_text(375,175,text=f'number of\n drops: {counter}',fill="black",tag="txt")
+                canvas.update()
+                y = 90
+        else:
+            break
+                
+
+
+
+
+
+canvas.mainloop()
+
+
 # chapter 5
 
 """ syntax pisania vlastnej funkcie
